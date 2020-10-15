@@ -1,5 +1,7 @@
 package es.iestriana.fundamentos.general;
 
+import java.util.Scanner;
+
 public class EjercicioTres {
 
 	/*
@@ -7,9 +9,24 @@ public class EjercicioTres {
 	 * las horas, minutos y segundos que lo forman
 	 */
 	
+	private static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println("SEGUNDOS: ");
+		int segundosTotales = sc.nextInt();
+		
+		int horas = segundosTotales / 3600;
+		int minutos = (segundosTotales - horas*3600) / 60;
+		int segundos = segundosTotales - (horas*3600) - (minutos*60);
+		
+		System.out.println("HORAS: " 
+							+ horas
+							+ " MINUTOS: "
+							+ minutos
+							+ " SEGUNDOS: "
+							+ segundos);
+		
+		sc.close();
 	}
 
 }
