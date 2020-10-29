@@ -46,6 +46,18 @@ public class Ejercicio9 {
 				break;
 			}
 
+			/*if (mes == 2) {
+				if (esBisiesto) {
+					diasDelMes = 29;
+				} else {
+					diasDelMes = 28;
+				}
+			} else if (mes == 1 || mes == 3 || ...) {
+				diasDelMes = 31;
+			} else {
+				diasDelMes = 30;
+			}*/
+
 			// Comprobar si nos hemos pasado del número de días
 			if (dia > diasDelMes) {
 				dia = 1;
