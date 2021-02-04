@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 <head>
@@ -16,12 +18,12 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-<title>LIBROS</title>
+<title>REGISTRAR</title>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<h1 class="text-center">WEB LIBROS</h1>
+			<h1 class="text-center">REGISTRO USUARIOS</h1>
 		</div>
 		<div class="row">
 			<%
@@ -43,21 +45,35 @@
 			%>
 		</div>
 		<div class="row">
-			<form role="form" method="post" action="ValidarUsuario">
+			<form role="form" method="post" action="../RegistrarUsuario">
 				<div class="mb-3">
-					<label for="usuario" class="form-label">Usuario</label> <input
-						type="text" class="form-control" id="usuario" name="usuario"
-						aria-describedby="usuarioHelp" placeholder="Usuario Web"
+					<label for="login" class="form-label">Login</label> <input
+						type="text" class="form-control" id="login" name="login"
+						aria-describedby="usuarioHelp" placeholder=""
 						autofocus="autofocus" required="required">
 				</div>
+				
 				<div class="mb-3">
 					<label for="password" class="form-label">Password</label> <input
 						type="password" class="form-control" id="password" name="password"
 						required="required">
 				</div>
+				
+				<div class="mb-3">
+					<label for="nombre" class="form-label">Nombre</label> <input
+						type="text" class="form-control" id="nombre" name="nombre"
+						aria-describedby="usuarioHelp" placeholder=""
+						required="required">
+				</div>
+				
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label> <input
+						type="email" class="form-control" id="email" name="email"
+						aria-describedby="usuarioHelp" placeholder=""
+						required="required">
+				</div>
 
-				<button type="submit" class="btn btn-primary"><i class="fas fa-share-square"></i> Entrar</button>
-				<button type="button" class="btn btn-secondary" onclick="location.href='jsp/registrar.jsp'"><i class="fas fa-user-plus"></i> Registrar</button>
+				<button type="submit" class="btn btn-primary"><i class="fas fa-share-square"></i> Enviar</button>				
 			</form>
 		</div>
 	</div>

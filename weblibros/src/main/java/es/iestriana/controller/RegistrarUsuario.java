@@ -14,15 +14,15 @@ import es.iestriana.dao.UsuarioDAO;
 import es.iestriana.dao.UsuarioDAOImpl;
 
 /**
- * Servlet implementation class ValidarUsuario
+ * Servlet implementation class RegistrarUsuario
  */
-public class ValidarUsuario extends HttpServlet {
+public class RegistrarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ValidarUsuario() {
+    public RegistrarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,13 +38,10 @@ public class ValidarUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usuario = request.getParameter("usuario");
+		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		
-		// Voy a capturar los datos del fichero web.xml
-		// Creamos un objeto de tipo Conexion pasando estos valores
-		// Llamamos al método comprobarUsuario del DAO que devuelve
-		// el usuario si existe en la BD o null si no existe
+		String nombre = request.getParameter("nombre");
+		String email = request.getParameter("email");
 		
 		ServletContext sc = getServletContext();
 		String usu = sc.getInitParameter("usuario");
@@ -55,12 +52,22 @@ public class ValidarUsuario extends HttpServlet {
 		Conexion con = new Conexion(usu, pass, driver, bd);
 		
 		UsuarioDAO uDAO = new UsuarioDAOImpl();
-		Usuario u = uDAO.comprobarUsuario(usuario, password, con);
 		
-		if (u != null) {
-			response.sendRedirect("principalUsuario.jsp");
+		Usuario usuReg = new Usuario(login, password, nombre, email, 0);
+		
+		if (!uDAO.buscarLogin(login, con)) {
+			if (!uDAO.buscarEmail(email, con)) {
+				int valores = uDAO.insertarUsuario(usuReg, con);
+				if (valores == 1) {
+					response.sendRedirect("jsp/registrar.jsp?mensaje=Usuario registrado correctamente");
+				} else {
+					response.sendRedirect("jsp/registrar.jsp?mensaje=Error al registrar el usuario");
+				}
+			} else {
+				response.sendRedirect("jsp/registrar.jsp?mensaje=Email registrado en la BD");
+			}
 		} else {
-			response.sendRedirect("index.jsp?mensaje=Usuario y/o Password Incorrecto");
+			response.sendRedirect("jsp/registrar.jsp?mensaje=Login registrado en la BD");
 		}
 	}
 
