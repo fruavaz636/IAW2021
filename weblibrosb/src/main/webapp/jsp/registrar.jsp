@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 <head>
@@ -12,13 +14,13 @@
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
 	crossorigin="anonymous">
 
-<title>LIBROS</title>
+<title>REGISTRO</title>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h2>WEB LIBROS</h2>
+				<h2>REGISTRO</h2>
 				<div class="row">
 					<%
 					String error = request.getParameter("mensaje");
@@ -38,20 +40,35 @@
 					}
 					%>
 				</div>
-				<form role="form" method="post" action="ValidarUsuario">
+				<form role="form" method="post" action="../RegistrarUsuario">
 					<div class="mb-3">
-						<label for="usuario" class="form-label">Usuario</label> <input
-							type="text" class="form-control" id="usuario" name="usuario"
-							aria-describedby="usuarioHelp" autofocus="autofocus"
+						<label for="login" class="form-label">Login</label> <input
+							type="text" class="form-control" id="login" name="login"
+							aria-describedby="loginHelp" autofocus="autofocus"
 							required="required">
-					</div>
+					</div>										
+					
 					<div class="mb-3">
 						<label for="password" class="form-label">Password</label> <input
 							type="password" class="form-control" id="password"
 							name="password" required="required">
 					</div>
-					<button type="submit" class="btn btn-primary">Enviar</button>
-					<button type="button" class="btn btn-secondary" onclick="location.href='jsp/registrar.jsp'">Registrar</button>
+					
+					<div class="mb-3">
+						<label for="nombre" class="form-label">Nombre</label> <input
+							type="text" class="form-control" id="nombre" name="nombre"
+							aria-describedby="nombreHelp"
+							required="required">
+					</div>
+					
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label> <input
+							type="email" class="form-control" id="email" name="email"
+							aria-describedby="emailHelp"
+							required="required">
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Enviar</button>					
 				</form>
 			</div>
 		</div>
