@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import es.iestriana.bean.Conexion;
 import es.iestriana.bean.Usuario;
+import es.iestriana.dao.UsuarioDAO;
+import es.iestriana.dao.UsuarioDAOImpl;
 
 /**
  * Servlet implementation class RegistrarUsuario
@@ -57,6 +59,23 @@ public class RegistrarUsuario extends HttpServlet {
 		
 		Usuario usuNuevo = new Usuario(login, password, nombre, email, 0);
 		
+		UsuarioDAO uDAO = new UsuarioDAOImpl();
+		
+		if (!uDAO.buscarLogin(login, con)) {
+			if (!uDAO.buscarEmail(email, con)) {
+				// Registrar
+				int datos = uDAO.registrar(usuNuevo, con);
+				if (datos == 1) {
+					response.sendRedirect("index.jsp?mensaje=Usuario registrado correctamente");
+				} else {
+					response.sendRedirect("jsp/registrar.jsp?mensaje=Error al registrar al usuario");
+				}
+			} else {
+				response.sendRedirect("jsp/registrar.jsp?mensaje=Email registrado en la BD");
+			}
+		} else {
+			response.sendRedirect("jsp/registrar.jsp?mensaje=Login registrado en la BD");
+		}
 	}
 
 }

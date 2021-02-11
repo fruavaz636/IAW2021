@@ -10,6 +10,8 @@ public interface UsuarioDAO {
 	public boolean buscarLogin(String login, Conexion c);
 	
 	public boolean buscarEmail(String email, Conexion c);
+
+	public int registrar(Usuario usuNuevo, Conexion con);
 	
 	
 }

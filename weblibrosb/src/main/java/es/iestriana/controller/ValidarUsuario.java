@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import es.iestriana.bean.Conexion;
 import es.iestriana.bean.Usuario;
@@ -57,7 +58,11 @@ public class ValidarUsuario extends HttpServlet {
 		Usuario usuWeb = uDAO.comprobarUsuario(usuario, password, con);
 		
 		if (usuWeb != null) {
-			response.sendRedirect("principalUsuario.jsp");
+			// Poner al usuario en sesión
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("usuarioWeb", usuWeb);
+			
+			response.sendRedirect("jsp/principalUsuario.jsp");
 		} else {
 			response.sendRedirect("index.jsp?mensaje=Usuario y/o Password Incorrecto");
 		}
