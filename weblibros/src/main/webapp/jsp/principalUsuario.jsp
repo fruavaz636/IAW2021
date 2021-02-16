@@ -1,3 +1,9 @@
+<%@page import="es.iestriana.bean.Libro"%>
+<%@page import="java.util.List"%>
+<%@page import="es.iestriana.dao.LibroDAOImpl"%>
+<%@page import="es.iestriana.dao.LibroDAO"%>
+<%@page import="es.iestriana.bean.Conexion"%>
+<%@page import="es.iestriana.bean.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -22,7 +28,29 @@
 </head>
 <body>
 	<div class="container">
+		Hola <% out.print(((Usuario)session.getAttribute("usuarioWeb")).getNombre()); %>
 		
+		<%
+		if(session.getAttribute("usuarioWeb") == null || session.isNew()) {
+			response.sendRedirect("../index.jsp?mensaje=Error de Sesión");
+		} else {
+			// Voy a capturar los datos del web.xml para conectar con BD
+			ServletContext sc = getServletContext();
+			String usu = sc.getInitParameter("usuario");
+			String pass = sc.getInitParameter("password");
+			String driver = sc.getInitParameter("driver");
+			String bd = sc.getInitParameter("database");
+			
+			Conexion con = new Conexion(usu, pass, driver, bd);
+			
+			LibroDAO lDAO = new LibroDAOImpl();
+			List<Libro> libros = lDAO.listar(con, (Usuario)session.getAttribute("usuarioWeb"));
+			for(Libro aux: libros) {
+				out.print(aux.getTitulo());
+			}
+		}
+		
+		%>
 	</div>
 
 	<script
