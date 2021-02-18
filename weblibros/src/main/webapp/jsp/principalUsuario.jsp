@@ -46,6 +46,15 @@
 			LibroDAO lDAO = new LibroDAOImpl();
 			List<Libro> libros = lDAO.listar(con, (Usuario)session.getAttribute("usuarioWeb"));				
 	
+			%>
+			<div class="row">
+				<div class="col-12">
+					<button type="button" class="btn btn-primary" onclick="location.href='anadirLibro.jsp'">Añadir Libro</button>
+					<a href="anadirLibro.jsp" class="btn btn-primary">Añadir Libro</a>
+				</div>
+			</div>
+			<%
+			
 			int i = 1;
 			for(Libro lib:libros) {
 				if (i== 1) {
@@ -61,12 +70,13 @@
 			%>
 			<div class="col-4">
 				<div class="card" style="margin: 10px">
-					<img alt="Libro" src="" class="card-img-top" 
-							style="width: 300px;height: 100px">
+					<img alt="Libro" src="image.jsp?idLibro=<%=lib.getIdLibro() %>" class="card-img-top" 
+							style="width: 180px;height: 100px">
 					<div class="card-body">
-						<h5 class="card-title">hh</h5>
-						<p class="card-text"></p>
-						<button type="button" class="btn btn-default">Actualizar</button>
+						<h5 class="card-title"><%=lib.getTitulo() %></h5>
+						<p class="card-text"><%=lib.getAutor() %></p>
+						<p class="card-text"> <small class="text-muted"><%=lib.getIsbn() %> </small> </p>
+						<button type="button" class="btn btn-secondary">Actualizar</button>
 						<button type="button" class="btn btn-danger">Borrar</button>
 					</div>
 				</div>
