@@ -9,4 +9,6 @@ import es.iestriana.bean.Usuario;
 public interface LibroDAO {
 
 	public List<Libro> listar(Conexion c, Usuario u);
+	
+	public byte [] obtenerPortada(Conexion c, int idLibro);
 }
